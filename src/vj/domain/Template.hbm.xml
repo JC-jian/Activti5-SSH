@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+ <hibernate-mapping>
+ 	<class name="vj.domain.Template" table="t_template">
+ 		<id name="id">
+ 			<generator class="native"></generator>
+ 		</id>
+ 		<property name="name" length="32"/>
+ 		<property name="pdName" length="32"/>
+ 		<property name="pdKey" length="32"/>
+ 		<property name="docFilePath" />
+ 	</class>
+ </hibernate-mapping>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <!-- 主题样式 -->
+    <constant name="struts.ui.theme" value="simple"/>
+    
+    <!-- 注册国际化文件 -->
+    <constant name="struts.custom.i18n.resources" value="massage"/>
+    
+    <package name="default" namespace="/" extends="struts-default">
+    	<!-- 全局结果集 -->
+    	<global-results>
+    		<result name="login">/index.jsp</result>
+    	</global-results>
+    	
+		<!-- 注册用户操作Action -->
+		<action name="userAction_*" class="userAction" method="{1}">
+			<result name="home">/home/index.jsp</result>
+		</action>
+		
+		<!-- 流程定义操作Action -->
+		<action name="processDefintionAction_*" class="processDefintionAction" method="{1}">
+			<result name="list">/pd/list.jsp</result>
+			<result name="tolist" type="redirectAction">
+				processDefintionAction_list
+			</result>
+			<result name="showPng" type="stream">
+				<param name="contentType">image/png</param>
+				<param name="inputName">pngStream</param>
+				<!-- <param name="contentDisposition">attachment;filename="document.pdf"</param> -->
+				<!-- <param name="bufferSize">1024</param> -->
+				
+			</result>
+		</action>
+		
+		<!-- 模板操作Action -->
+		<action name="templateAction_*" class="templateAction" method="{1}">
+			<result name="list">/template/list.jsp</result>
+			<result name="addUI">/template/addUI.jsp</result>
+			<result name="tolist" type="redirectAction">
+				templateAction_list
+			</result>
+			<result name="editUI">/template/editUI.jsp</result>
+			
+			<result name="download" type="stream">
+				<param name="inputName">docStream</param>
+				<param name="contentDisposition">attachment;filename="${docName}"</param>
+				
+			</result>
+			
+		</action>
+		
+		<!-- 流程控制Action -->
+		<action name="flowAction_*" class="flowAction" method="{1}">
+			<result name="templateList">/flow/templateList.jsp</result>
+			<result name="submitUI">/flow/submitUI.jsp</result>
+			<result name="toTemplateList" type="redirectAction">
+				templateAction_list
+			</result>
+			<result name="myApplicationList">/flow/applicationList.jsp</result>
+			<result name="showPng">/flow/image.jsp</result>		
+			<result name="viewImage" type="stream">
+				<param name="contentType">image/png</param>
+				<param name="inputName">imageStream</param>
+				<!-- <param name="contentDisposition">attachment;filename="document.pdf"</param> -->
+				<!-- <param name="bufferSize">1024</param> -->
+			</result>
+			<result name="approveInfoList">/flow/approveInfoList.jsp</result>	
+			<result name="myTaskList">/flow/myTaskList.jsp</result>
+			<result name="approveUI">/flow/approveUI.jsp</result>
+			<result name="toMyTaskList" type="redirectAction">
+					flowAction_myTaskList
+			</result>
+		</action>
+		
+    </package>
+</struts>

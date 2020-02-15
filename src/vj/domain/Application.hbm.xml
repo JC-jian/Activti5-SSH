@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+   
+ <hibernate-mapping>
+ 	<class name="vj.domain.Application" table="t_application">
+ 		<id name="id">
+ 			<generator class="native"></generator>
+ 		</id>
+ 		<property name="title" length="128"/>
+ 	
+ 		<!-- 配置申请和用户的多对一关系 -->
+ 		<many-to-one name="applicant" class="vj.domain.User" column="user_id"/>
+ 		
+ 		<property name="applyDate"/>
+ 		<property name="status" length="12"/>
+ 		<property name="docFilePath"/>
+ 		
+ 		<!-- 配置申请和审批实体的多对一关系 -->
+ 		<set name="approveInfos">
+ 			<key column="application_id"/>
+ 			<one-to-many class="vj.domain.ApproveInfo"/>
+ 		</set>
+ 		
+ 		<!-- 配置申请和模板对象的多对一关系 -->
+ 		<many-to-one name="template" class="vj.domain.Template" column="template_id"/>
+ 		
+ 	</class>
+ </hibernate-mapping>
